@@ -57,7 +57,7 @@ function App() {
 
   return (
     <>
-      {alert.show && <Alert type={alet.type} text={alert.text} />}
+      {alert.show && <Alert type={alert.type} text={alert.text} />}
       <Alert />
       <h1>budget calculator</h1>
       <main className="App">
