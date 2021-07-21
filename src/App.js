@@ -59,32 +59,48 @@ function App() {
       setAmount("");
     } else {
       //handle alert call
-      handleAlert({ type: "danger", text: "charge can't be empty value and amount has to be greater than 0" })
+      handleAlert({ type: "danger", text: "charge can't be empty value and amount has to be greater than 0 " })
     }
 
   }
+  //clear all items
+  const clearItems = () => {
+    setExpenses([]);
+  }
+  //delete a single item
+  const handleDelete = id => {
+    let tempExpenses = expenses.filter(item => item.id !== id)
+    setExpenses([tempExpenses]);
+    //edit a single item
+    const handleEdit = id => {
+      console.log("edit a single item");
+    }
 
-  return (
-    <>
-      {alert.show && <Alert type={alert.type} text={alert.text} />}
-      <Alert />
-      <h1>budget calculator</h1>
-      <main className="App">
-        <ExpenseForm charge={charge} amount={amount}
-          handleCharge={handleCharge} handleAmount={handleAmount}
-          handleSubmit={handleSubmit} />
-        <ExpenseList expenses={expenses} />
-      </main>
-      <h1>
-        total spending: <span className="total">
-          $
+    return (
+      <>
+        {alert.show && <Alert type={alert.type} text={alert.text} />}
+        <Alert />
+        <h1>budget calculator</h1>
+        <main className="App">
+          <ExpenseForm charge={charge} amount={amount}
+            handleCharge={handleCharge} handleAmount={handleAmount}
+            handleSubmit={handleSubmit} />
+          <ExpenseList
+            expenses={expenses}
+            clearItems={clearItems}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit} />
+        </main>
+        <h1>
+          total spending: <span className="total">
+            $
           {expenses.reduce((acc, curr) => {
-        return (acc += parseInt(curr.amount));
-      }, 0)}
-        </span>
-      </h1>
-    </>
-  );
-}
+          return (acc += parseInt(curr.amount));
+        }, 0)}
+          </span>
+        </h1>
+      </>
+    );
+  }
 
-export default App;
+  export default App;
